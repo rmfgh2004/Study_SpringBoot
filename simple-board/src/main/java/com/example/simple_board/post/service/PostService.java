@@ -51,8 +51,6 @@ public class PostService {
                     var format = "패스워드가 맞지 않습니다 %s vs %s";
                     throw new RuntimeException(String.format(format, it.getPassword(), postViewRequest.getPassword()));
                 }
-                var replyList = replyService.findAllByPostId(it.getId());
-                it.setReplyList(replyList);
                 return it;
             }).orElseThrow(
                 () -> {

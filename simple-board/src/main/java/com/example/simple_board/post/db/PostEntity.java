@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,7 +56,10 @@ public class PostEntity {
 
     private LocalDateTime postedAt;
 
-    @Transient
+    @OneToMany(
+        mappedBy = "post"
+    )
+    @Builder.Default
     private List<ReplyEntity> replyList = List.of();
 
 }
