@@ -3,9 +3,12 @@ package com.example.simple_board.post.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.simple_board.board.controller.BoardApiController;
 import com.example.simple_board.board.db.BoardRepository;
+import com.example.simple_board.common.Api;
+import com.example.simple_board.common.Pagination;
 import com.example.simple_board.post.db.PostEntity;
 import com.example.simple_board.post.db.PostRepository;
 import com.example.simple_board.post.model.PostRequest;
@@ -59,8 +62,20 @@ public class PostService {
             );
     }
 
-    public List<PostEntity> all() {
-        return postRepository.findAll();
+    public Api<List<PostEntity>> all(Pageable pageable) {
+        var list = postRepository.findAll(pageable);
+
+        var pagination = Pagination.builder()
+            .page(list.getNumber())
+            .size(list.getSize())
+            .currentElements(list.getNumberOfElements())
+            .totalElements(list.getTotalElements())
+            .totalPage(list.getTotalPages())
+            .build();
+        return Api.<List<PostEntity>>builder()
+            .body(list.toList())
+            .pagination(pagination)
+            .build();
     }
 
     public void delete(PostViewRequest postViewRequest) {
