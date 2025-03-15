@@ -1,8 +1,11 @@
-package com.example.simple_board.board.db;
+package com.example.simple_board.board.model;
 
 import java.util.List;
 
 import com.example.simple_board.post.db.PostEntity;
+import com.example.simple_board.post.model.PostDto;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,19 +25,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@Entity(name = "board")
-public class BoardEntity {
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class BoardDto {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String boardName;
     
     private String status;
-    
-    @OneToMany(
-        mappedBy = "board"
-    )
-    private List<PostEntity> postList = List.of();
+
+    private List<PostDto> postList = List.of();
 }
