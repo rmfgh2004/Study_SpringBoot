@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/user")
 public class UserApiController {
 
-    @OpenApi
     @PostMapping("")
     public UserRequest register(
         @RequestBody
