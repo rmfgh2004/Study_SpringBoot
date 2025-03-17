@@ -16,7 +16,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void login(
+    public String login(
         LoginRequest loginRequest,
         HttpServletResponse response
     ) {
@@ -29,18 +29,13 @@ public class UserService {
             var userDto = optionalUser.get();
             
             if (userDto.getPassword().equals(pw)) {
-                var cookie = new Cookie("authorization-cookie", userDto.getId());
-                cookie.setDomain("localhost");
-                cookie.setPath("/");
-                cookie.setHttpOnly(true);
-                cookie.setMaxAge(-1);
-
-                response.addCookie(cookie);
+                return userDto.getId();
             } else {
                 throw new RuntimeException("Password Not Match");    
             }
         } else {
-            throw new RuntimeException("User Not Found");
+            return null;
+            // throw new RuntimeException("User Not Found");
         }
     }
     

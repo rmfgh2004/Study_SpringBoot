@@ -19,12 +19,12 @@ public class AccountApiController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public void login(
+    public String login(
         @RequestBody
         LoginRequest loginRequest,
         HttpServletResponse response
     ) {
-        userService.login(loginRequest, response);
+        return userService.login(loginRequest, response);
     }
     
 }

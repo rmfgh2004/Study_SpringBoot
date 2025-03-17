@@ -2,6 +2,7 @@ package com.example.cookie.controller;
 
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,17 @@ public class UserApiController {
         //     }
 
         // }
+
+        return optionalUserDto.get();
+    }
+
+    @GetMapping("/me2")
+    public UserDto me2(
+        @RequestHeader(name = "authorization", required = false)
+        String authorizationHeader
+    ) {
+        log.info("authorizationHeader : {}", authorizationHeader);
+        var optionalUserDto = userRepository.findById(authorizationHeader);
 
         return optionalUserDto.get();
     }
