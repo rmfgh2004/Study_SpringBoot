@@ -1,0 +1,9 @@
+2025-03-15 04:07:37.294663Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop table if exists [*]user"; expected "identifier"; SQL statement:
+drop table if exists user [42001-224]
+2025-03-15 04:07:37.307474Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (age integer, id bigint not null auto_increment, email varchar(255), name varchar(255), primary key (id)) engine=InnoDB"; expected "identifier"; SQL statement:
+create table user (age integer, id bigint not null auto_increment, email varchar(255), name varchar(255), primary key (id)) engine=InnoDB [42001-224]
+2025-03-15 04:09:18.481655Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null auto_increment, age integer, email varchar(255), name varchar(255), primary key (id)) engine=InnoDB"; expected "identifier"; SQL statement:
+create table user (id bigint not null auto_increment, age integer, email varchar(255), name varchar(255), primary key (id)) engine=InnoDB [42001-224]
